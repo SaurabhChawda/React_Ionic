@@ -1,60 +1,26 @@
-import MessageListItem from '../components/MessageListItem';
-import { useState } from 'react';
-import { Message, getMessages } from '../data/messages';
-import {
-  IonContent,
-  IonHeader,
-  IonList,
-  IonPage,
-  IonRefresher,
-  IonRefresherContent,
-  IonTitle,
-  IonToolbar,
-  useIonViewWillEnter
-} from '@ionic/react';
-import './Home.css';
+import React from 'react';
+import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonMenuToggle, IonButton, IonPage } from '@ionic/react';
 
-const Home: React.FC = () => {
-
-  const [messages, setMessages] = useState<Message[]>([]);
-
-  useIonViewWillEnter(() => {
-    const msgs = getMessages();
-    setMessages(msgs);
-  });
-
-  const refresh = (e: CustomEvent) => {
-    setTimeout(() => {
-      e.detail.complete();
-    }, 3000);
-  };
-
-  return (
-    <IonPage id="home-page">
+export const Home: React.FC = () => (
+  <>
+    {/* <IonMenu side="start" menuId="first" contentId="main"> */}
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Inbox</IonTitle>
+        <IonToolbar color="primary">
+          <IonTitle>Example Menu</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonRefresher slot="fixed" onIonRefresh={refresh}>
-          <IonRefresherContent></IonRefresherContent>
-        </IonRefresher>
-
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">
-              Inbox
-            </IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
+      <IonContent>
         <IonList>
-          {messages.map(m => <MessageListItem key={m.id} message={m} />)}
+          <IonItem>Menu Item</IonItem>
         </IonList>
       </IonContent>
+    {/* </IonMenu> */}
+    <IonPage id="main">
+      <IonContent>
+        <IonMenuToggle>
+          <IonButton>Toggle Menu</IonButton>
+        </IonMenuToggle>
+      </IonContent>
     </IonPage>
-  );
-};
-
-export default Home;
+  </>
+);
