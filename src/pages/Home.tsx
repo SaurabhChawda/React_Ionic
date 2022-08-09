@@ -1,26 +1,72 @@
-import React from 'react';
-import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonMenuToggle, IonButton, IonPage } from '@ionic/react';
+import './Home.css'
+import { useAppSelector, useAppDispatch } from '../Redux/app/hooks'
+import { userProduct } from '../Redux/features/DataSlice'
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+} from '@ionic/react'
 
-export const Home: React.FC = () => (
-  <>
-    {/* <IonMenu side="start" menuId="first" contentId="main"> */}
+type Home = {
+  data: any
+}
+export const Home: React.FC = () => {
+  const dispatch = useAppDispatch()
+  const data = useAppSelector((state) => state.data.product)
+  console.log(data)
+
+  return (
+    <IonPage>
       <IonHeader>
-        <IonToolbar color="primary">
-          <IonTitle>Example Menu</IonTitle>
-        </IonToolbar>
+        <IonGrid class="ion-no-padding">
+          <IonRow>
+            <IonCol offset-xl="1" size-xl="10">
+              <IonToolbar>
+                <IonTitle>React_Ionic</IonTitle>
+              </IonToolbar>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonHeader>
       <IonContent>
-        <IonList>
-          <IonItem>Menu Item</IonItem>
-        </IonList>
+        <IonGrid class="ion-no-padding">
+          <IonRow>
+            <IonCol offset-xl="1" size-xl="10">
+              <IonButton expand="block" onClick={() => dispatch(userProduct())}>
+                Show Product
+              </IonButton>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
-    {/* </IonMenu> */}
-    <IonPage id="main">
-      <IonContent>
-        <IonMenuToggle>
-          <IonButton>Toggle Menu</IonButton>
-        </IonMenuToggle>
-      </IonContent>
+      {data && (
+        <IonContent>
+          <IonGrid class="ion-no-padding">
+            <IonRow>
+              <IonCol offset-xl="1" size-xl="10">
+                <IonCard>
+                  <IonCardHeader>
+                    <IonCardTitle>
+                      {' '}
+                      <p></p>
+                      {data.title}
+                    </IonCardTitle>
+                  </IonCardHeader>
+                </IonCard>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+        </IonContent>
+      )}
     </IonPage>
-  </>
-);
+  )
+}
