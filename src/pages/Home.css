@@ -1,0 +1,7 @@
+ion-grid{
+    --ion-grid-width:1200px;
+  }
+  ion-card{
+   max-width: 20rem;
+   min-width: 17rem;
+  }

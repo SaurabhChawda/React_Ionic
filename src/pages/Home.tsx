@@ -14,6 +14,10 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
+  IonImg,
+  IonText,
+  IonCardSubtitle,
+  IonCardContent,
 } from '@ionic/react'
 
 type Home = {
@@ -27,40 +31,31 @@ export const Home: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonGrid class="ion-no-padding">
+        <IonGrid class="ion-no-padding" fixed>
           <IonRow>
-            <IonCol offset-xl="1" size-xl="10">
+            <IonCol>
               <IonToolbar>
                 <IonTitle>React_Ionic</IonTitle>
               </IonToolbar>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </IonHeader>
-      <IonContent>
-        <IonGrid class="ion-no-padding">
-          <IonRow>
-            <IonCol offset-xl="1" size-xl="10">
               <IonButton expand="block" onClick={() => dispatch(userProduct())}>
                 Show Product
               </IonButton>
             </IonCol>
           </IonRow>
         </IonGrid>
-      </IonContent>
-      {data && (
+      </IonHeader>
+      {Object.keys(data).length !== 0 && (
         <IonContent>
-          <IonGrid class="ion-no-padding">
+          <IonGrid fixed class="ion-no-padding">
             <IonRow>
-              <IonCol offset-xl="1" size-xl="10">
+              <IonCol>
                 <IonCard>
+                  <IonImg src={data.image} />
                   <IonCardHeader>
-                    <IonCardTitle>
-                      {' '}
-                      <p></p>
-                      {data.title}
-                    </IonCardTitle>
+                    <IonCardSubtitle>Destination</IonCardSubtitle>
+                    <IonCardTitle>{data.title}</IonCardTitle>
                   </IonCardHeader>
+                  <IonCardContent>{data.description}</IonCardContent>
                 </IonCard>
               </IonCol>
             </IonRow>
